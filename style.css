@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px; /* 20px * 1.5 */
+}
+
+.card {
+    background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%); /* Màu mặc định Vietcombank */
+    border-radius: 30px; /* 20px * 1.5 */
+    padding: 30px; /* 20px * 1.5 */
+    width: 750px; /* 500px * 1.5 */
+    height: 450px; /* 300px * 1.5 */
+    color: white;
+    position: relative; 
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1); /* 20px*1.5, 40px*1.5 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation: fadeIn 0.8s ease-out;
+    background-size: cover;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px); /* 20px * 1.5 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    border-radius: 30px; /* 20px * 1.5 */
+    pointer-events: none;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 22.5px; /* 15px * 1.5 */
+    margin-bottom: 15px; /* 10px * 1.5 */
+}
+
+.logo {
+    width: 75px;  /* 50px * 1.5 */
+    height: 75px; /* 50px * 1.5 */
+    background: white;
+    border-radius: 15px; /* 10px * 1.5 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 7.5px 15px rgba(0,0,0,0.2); /* 5px*1.5, 10px*1.5 */
+    overflow: hidden; 
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 7.5px; /* 5px * 1.5 */
+}
+
+.bank-name {
+    font-size: 36px; /* 24px * 1.5 */
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3); /* 2px*1.5, 2px*1.5, 4px*1.5 */
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-info {
+    flex: 1;
+    text-align: left;
+}
+
+.amount-display {
+    font-size: 42px; /* 28px * 1.5 */
+    font-weight: bold;
+    margin-bottom: 12px; /* 8px * 1.5 */
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3); /* 2px*1.5, 2px*1.5, 4px*1.5 */
+    color: #ffd700; 
+}
+
+.account-name {
+    font-size: 27px; /* 18px * 1.5 */
+    line-height: 1.3em;
+    font-weight: bold;
+    margin-bottom: 7.5px; /* 5px * 1.5 */
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3); /* 2px*1.5, 2px*1.5, 4px*1.5 */
+}
+
+.account-number {
+    font-size: 36px; /* 24px * 1.5 */
+    font-weight: bold;
+    margin-bottom: 7.5px; /* 5px * 1.5 */
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3); /* 2px*1.5, 2px*1.5, 4px*1.5 */
+}
+
+.transfer-text {
+    font-size: 24px; /* 16px * 1.5 */
+    opacity: 0.9;
+}
+
+.qr-code {
+    width: 300px; /* 200px * 1.5 */
+    height: 300px; /* 200px * 1.5 */
+    background: white;
+    border-radius: 18px; /* 12px * 1.5 */
+    padding: 12px; /* 8px * 1.5 */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2); /* 10px*1.5, 20px*1.5 */
+    transition: transform 0.3s ease;
+}
+
+.qr-code:hover {
+    transform: scale(1.05);
+}
+
+.qr-code img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 9px; /* 6px * 1.5 */
+}
+
+/* Nút chụp ảnh */
+.capture-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.capture-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.capture-button:active {
+    transform: translateY(0);
+}
+
+/* Thông báo lỗi/thành công */
+.error-message {
+    position: fixed;
+    top: 90px; /* Chuyển xuống dưới nút chụp ảnh */
+    right: 20px;
+    background: #ff4444;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1001;
+    animation: slideIn 0.5s ease-out;
+}
+
+.error-message.success {
+    background-color: #28a745; 
+}
+
+.error-message.warning {
+    background-color: #ffc107;
+    color: #333;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Cập nhật cả media query để responsive hợp lý với kích thước mới */
+@media (max-width: 800px) { /* Tăng điểm break point từ 768px lên */
+    .card {
+        width: 100%;
+        max-width: 600px; /* 400px * 1.5 */
+        height: auto;
+        padding: 45px; /* 30px * 1.5 */
+    }
+    .bank-name {
+        font-size: 33px; /* 22px * 1.5 */
+    }
+    .amount-display {
+        font-size: 36px; /* 24px * 1.5 */
+    }
+    .account-name {
+        font-size: 24px; /* 16px * 1.5 */
+    }
+    .account-number {
+        font-size: 33px; /* 22px * 1.5 */
+    }
+    .transfer-text {
+        font-size: 21px; /* 14px * 1.5 */
+    }
+    .qr-code {
+        width: 180px; /* 120px * 1.5 */
+        height: 180px; /* 120px * 1.5 */
+    }
+}

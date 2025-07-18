@@ -1,0 +1,114 @@
+{
+    "MBBank": {
+        "logo": "img/mbbank-icon.png",
+        "color": "#1f2596"
+    },
+    "Vietcombank": {
+        "logo": "img/vietcombank-icon.png",
+        "color": "#177c44"
+    },
+    "Techcombank": {
+        "logo": "img/techcombank-icon.png",
+        "color": "#2a2a2a"
+    },
+    "BIDV": {
+        "logo": "img/bidv-icon.png",
+        "color": "#006b68"
+    },
+    "VietinBank": {
+        "logo": "img/vietinbank-icon.png",
+        "color": "#005992"
+    },
+    "ACB": {
+        "logo": "img/acb-icon.png",
+        "color": "#002395"
+    },
+    "TPBank": {
+        "logo": "img/tpbank-icon.png",
+        "color": "#5f0ea7"
+    },
+    "VPBank": {
+        "logo": "img/vpbank-icon.png",
+        "color": "#177c44"
+    },
+    "Agribank": {
+        "logo": "img/agribank-icon.png",
+        "color": "#8e2c43"
+    },
+    "MSB": {
+        "logo": "img/msb-icon.png",
+        "color": "#f36500"
+    },
+    "OCB": {
+        "logo": "img/ocb-icon.png",
+        "color": "#008c44"
+    },
+    "KienlongBank": {
+        "logo": "img/kienlongbank-icon.png",
+        "color": "#348bcb"
+    },
+    "Eximbank": {
+        "logo": "img/eximbank-icon.png",
+        "color": "#0f6197"
+    },
+    "HDBank": {
+        "logo": "img/hdbank-icon.png",
+        "color": "#8d2428"
+    },
+    "Sacombank": {
+        "logo": "img/sacombank-icon.png",
+        "color": "#034693"
+    },
+    "VIB": {
+        "logo": "img/vib-icon.png",
+        "color": "#0065b3"
+    },
+    "ABBANK": {
+        "logo": "img/abbank-icon.png",
+        "color": "#008688"
+    },
+    "LPBank": {
+        "logo": "img/lienvietpostbank-icon.png",
+        "color": "#2a2a2a"
+    },
+    "BacABank": {
+        "logo": "img/bacabank-icon.png",
+        "color": "#627676"
+    },
+    "SeABank": {
+        "logo": "img/seabank-icon.png",
+        "color": "#a7403a"
+    },
+    "SHB": {
+        "logo": "img/shb-icon.png",
+        "color": "#f58220"
+    },
+    "NCB": {
+        "logo": "img/ncb-icon.png",
+        "color": "#a5dbdb"
+    },
+    "WooriBank": {
+        "logo": "img/woori-icon.png",
+        "color": "#0067ac"
+    },
+    "VietABank": {
+        "logo": "img/vieta-icon.png",
+        "color": "#264579"
+    },
+    "VietBank": {
+        "logo": "img/vietbank-icon.png",
+        "color": "#0055a5"
+    },
+    "NamABank": {
+        "logo": "img/nama-icon.png",
+        "color": "#006bb6"
+    },
+    "PGBank": {
+        "logo": "img/pgbank-icon.png",
+        "color": "#133a9b"
+    },
+    "PublicBank": {
+        "logo": "img/publicbank-icon.png",
+        "color": "#8f0005"
+    }
+}

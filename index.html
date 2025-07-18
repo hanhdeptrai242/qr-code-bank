@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin Ngân hàng</title>
+    
+    <!-- CSS cho thông báo (SweetAlert2) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- CSS chính của bạn -->
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <!-- NÚT CHỤP ẢNH -->
+    <button id="captureButton" class="capture-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        <span>Chụp ảnh</span>
+    </button>
+
+    <!-- THẺ THÔNG TIN NGÂN HÀNG -->
+    <div class="card" id="bankCard">
+        <div class="card-header">
+            <div class="logo" id="bankLogo">
+                <!-- Logo sẽ được chèn bằng JavaScript -->
+            </div>
+            <div class="bank-name" id="bankName">Ngân hàng Vietcombank</div>
+        </div>
+        <div class="card-content">
+            <div class="card-info">
+                <div class="amount-display" id="amountDisplay" style="display: none;"></div>
+                <div class="account-name" id="accountName">BUI DUC HANH</div>
+                <div class="account-number" id="accountNumber">9966523518</div>
+                <div class="transfer-text">Quét để chuyển tiền nhanh</div>
+            </div>
+            <div class="qr-code">
+                <img id="qrImage" src="https://img.vietqr.io/image/Vietcombank-9966523518-qr_only.jpg?amount=0&addInfo=gia%20han%20elementor%20sphone" alt="QR Code">
+            </div>
+        </div>
+    </div>
+    
+    <!-- CÁC THƯ VIỆN JAVASCRIPT CẦN THIẾT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/dist/dom-to-image.min.js"></script>
+    
+    <!-- File JavaScript chính của bạn -->
+    <script src="script.js" defer></script> 
+</body>
+</html>

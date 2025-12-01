@@ -10,6 +10,7 @@ const DEFAULT = {
     content: ""
 };
 
+// DOM Elements
 const elements = {
     bankName: document.getElementById('bankName'),
     accountName: document.getElementById('accountName'),
@@ -19,7 +20,8 @@ const elements = {
     bankCard: document.getElementById('bankCard'),
     amountDisplay: document.getElementById('amountDisplay'),
     
-    bankGrid: document.getElementById('bankGrid'),
+    // Controls
+    bankGrid: document.getElementById('bankGrid'), // Thay vì Select, giờ là Grid Div
     inputName: document.getElementById('inputAccountName'),
     inputNumber: document.getElementById('inputAccountNumber'),
     inputAmount: document.getElementById('inputAmount'),
@@ -37,32 +39,47 @@ async function loadBankData() {
     try {
         const response = await fetch('bank_data.json');
         bankData = await response.json();
+        
+        // 1. Tạo Grid chọn ngân hàng
         renderBankGrid();
+        
+        // 2. Điền thông tin từ URL (nếu có)
         parseUrlToInputs();
+        
     } catch (error) {
         console.error('Lỗi tải data:', error);
         alert('Lỗi tải dữ liệu ngân hàng.');
     }
 }
 
+// Hàm mới: Tạo danh sách ngân hàng dạng Grid
 function renderBankGrid() {
     elements.bankGrid.innerHTML = '';
+    
     for (const [code, info] of Object.entries(bankData)) {
+        // Tạo label bao bọc (để click được cả ô)
         const label = document.createElement('label');
         label.className = 'bank-option';
         
+        // Input Radio (ẩn)
         const radio = document.createElement('input');
-        radio.type = 'radio'; radio.name = 'bank_choice'; radio.value = code;
+        radio.type = 'radio';
+        radio.name = 'bank_choice';
+        radio.value = code;
         
+        // Ảnh logo
         const img = document.createElement('img');
-        img.src = info.logo; img.alt = code;
+        img.src = info.logo;
+        img.alt = code;
         
+        // Tên ngân hàng (Code)
         const span = document.createElement('span');
         span.textContent = code;
 
         label.appendChild(radio);
         label.appendChild(img);
         label.appendChild(span);
+        
         elements.bankGrid.appendChild(label);
     }
 }
@@ -70,12 +87,14 @@ function renderBankGrid() {
 function parseUrlToInputs() {
     const urlParams = new URLSearchParams(window.location.search);
     const keys = Array.from(urlParams.keys());
+
     let current = { ...DEFAULT };
 
     if (keys.length > 0) {
         try {
             const decodedData = decodeURIComponent(keys[0]);
             const parts = decodedData.split('-');
+            
             if (parts.length >= 3) {
                 current.bank = parts[0];
                 current.name = parts[1].replace(/\+/g, ' ');
@@ -86,11 +105,14 @@ function parseUrlToInputs() {
         } catch (e) {}
     }
 
+    // Set giá trị cho Radio Button
     const radioToSelect = elements.bankGrid.querySelector(`input[value="${current.bank}"]`);
     if (radioToSelect) {
         radioToSelect.checked = true;
+        // Scroll đến ngân hàng đang chọn
         radioToSelect.parentElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     } else {
+        // Fallback về mặc định nếu không tìm thấy
         const defaultRadio = elements.bankGrid.querySelector(`input[value="${DEFAULT.bank}"]`);
         if (defaultRadio) defaultRadio.checked = true;
     }
@@ -98,17 +120,22 @@ function parseUrlToInputs() {
     elements.inputName.value = current.name;
     elements.inputNumber.value = current.number;
     elements.inputContent.value = current.content;
+    
     if (current.amount && parseInt(current.amount) > 0) {
         elements.inputAmount.value = formatNumberWithDots(current.amount);
     } else {
         elements.inputAmount.value = "";
     }
+
     updateCardFromInputs();
 }
 
 function setupEventListeners() {
+    // Sự kiện khi click vào Grid Ngân hàng (Dùng Event Delegation)
     elements.bankGrid.addEventListener('change', (e) => {
-        if (e.target.name === 'bank_choice') updateCardFromInputs();
+        if (e.target.name === 'bank_choice') {
+            updateCardFromInputs();
+        }
     });
     
     elements.inputName.addEventListener('input', () => {
@@ -135,12 +162,8 @@ function formatNumberWithDots(str) {
     return new Intl.NumberFormat('vi-VN').format(str);
 }
 
-// Hàm làm tối/sáng màu Hex
-function adjustColor(color, amount) {
-    return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
-}
-
 function updateCardFromInputs() {
+    // Lấy ngân hàng từ radio đang checked
     const checkedRadio = elements.bankGrid.querySelector('input[name="bank_choice"]:checked');
     const bankCode = checkedRadio ? checkedRadio.value : DEFAULT.bank;
 
@@ -151,24 +174,12 @@ function updateCardFromInputs() {
     const rawAmountStr = elements.inputAmount.value.replace(/\./g, '');
     const amount = rawAmountStr ? parseInt(rawAmountStr) : 0;
 
-    // --- XỬ LÝ NỀN PHỨC TẠP (GIAO THOA MÀU) ---
+    // Render Card
     const bankInfo = bankData[bankCode] || bankData[DEFAULT.bank];
-    const mainColor = bankInfo.color;
-    const darkColor = adjustColor(mainColor, -40); // Màu đậm hơn chút
-    
-    // Tạo chuỗi gradient phức tạp
-    // Layer 1: Đốm sáng trắng mờ ở góc trái trên
-    // Layer 2: Đốm sáng/đậm mờ ở góc phải dưới
-    // Layer 3: Nền chính Linear Gradient chéo
-    elements.bankCard.style.background = `
-        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.25) 0%, transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(0, 0, 0, 0.2) 0%, transparent 40%),
-        linear-gradient(135deg, ${mainColor} 0%, ${darkColor} 100%)
-    `;
-
-    // Cập nhật nội dung
     elements.bankName.textContent = `Ngân hàng ${bankCode}`;
     elements.bankLogo.innerHTML = `<img src="${bankInfo.logo}" alt="${bankCode}">`;
+    elements.bankCard.style.background = `linear-gradient(135deg, ${bankInfo.color} 0%, ${adjustColor(bankInfo.color, -30)} 100%)`;
+
     elements.accountName.textContent = accountName;
     elements.accountNumber.textContent = accountNumber;
     document.title = `${bankCode} - ${accountName}`;
@@ -194,6 +205,10 @@ function updateCardFromInputs() {
     window.history.replaceState({ path: newUrl }, '', newUrl);
 }
 
+function adjustColor(color, amount) {
+    return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
+}
+
 async function captureAndCopyCard() {
     try {
         Swal.fire({
@@ -201,7 +216,6 @@ async function captureAndCopyCard() {
             title: 'Đang xử lý ảnh...', showConfirmButton: false, timer: 1000
         });
 
-        // Chụp ảnh
         const dataUrl = await domtoimage.toPng(elements.bankCard, { 
             quality: 1.0, scale: 2,
             style: { transform: 'scale(1)', margin: 0 } 

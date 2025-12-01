@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <!-- KHU VỰC ĐIỀU KHIỂN (Nút chụp + Form nhập liệu) -->
+    <!-- KHU VỰC ĐIỀU KHIỂN (BÊN PHẢI) -->
     <div class="right-controls">
         <!-- Nút Chụp Ảnh -->
         <button id="captureButton" class="capture-button">
@@ -23,9 +23,13 @@
 
         <!-- Panel Nhập Liệu -->
         <div class="control-panel">
+            
+            <!-- Phần chọn ngân hàng dạng Grid -->
             <div class="form-group">
-                <label>Ngân hàng</label>
-                <select id="bankSelect" class="form-control"></select>
+                <label>Chọn Ngân hàng</label>
+                <div id="bankGrid" class="bank-grid">
+                    <!-- Javascript sẽ tạo các ô radio ở đây -->
+                </div>
             </div>
             
             <div class="form-group">
@@ -41,12 +45,11 @@
             <div class="form-group">
                 <label>Số tiền (VNĐ)</label>
                 <input type="text" id="inputAmount" class="form-control" placeholder="0">
-                <small style="color: #666; font-size: 11px;">Nhập số, tự động thêm dấu chấm</small>
             </div>
 
             <div class="form-group">
                 <label>Nội dung (Lời nhắn)</label>
-                <textarea id="inputContent" class="form-control" rows="2" placeholder="Nhập nội dung chuyển khoản..."></textarea>
+                <textarea id="inputContent" class="form-control" rows="2" placeholder="Nhập nội dung..."></textarea>
             </div>
         </div>
     </div>
@@ -55,7 +58,7 @@
     <div class="card" id="bankCard">
         <div class="card-header">
             <div class="logo" id="bankLogo">
-                <!-- Logo sẽ được chèn bằng JS -->
+                <!-- Logo -->
             </div>
             <div class="bank-name" id="bankName">Ngân hàng Vietcombank</div>
         </div>
@@ -72,11 +75,9 @@
         </div>
     </div>
     
-    <!-- THƯ VIỆN HỖ TRỢ -->
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/dist/dom-to-image.min.js"></script>
-    
-    <!-- JAVASCRIPT LOGIC -->
     <script src="script.js" defer></script> 
 </body>
 </html>
